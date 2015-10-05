@@ -229,7 +229,7 @@ function create_installation {(
   cd toor
   mkdir -p usr/share/doc/mesos etc/default etc/mesos var/log/mesos
   mkdir -p etc/mesos-master etc/mesos-slave var/lib/mesos
-  cp ../CHANGELOG                usr/share/doc/mesos/
+  #cp ../CHANGELOG                usr/share/doc/mesos/
   cp "$this"/default/mesos*      etc/default/
   echo zk://localhost:2181/mesos > etc/mesos/zk
   if [[ $(vercomp "$version" 0.19.0) == '>' ]] ||
@@ -247,13 +247,13 @@ function create_installation {(
   mkdir -p usr/libexec/mesos/
   mkdir -p usr/share
   mkdir -p usr/sbin
-  cp $inst_dir/usr/bin/mesos* usr/bin
-  cp $inst_dir/usr/lib/*.la usr/lib
-  cp $inst_dir/usr/lib/libmesos-*.so usr/lib
-  cp $inst_dir/usr/libexec/mesos/mesos* usr/libexec/mesos
-  cp -r $inst_dir/usr/share usr/
-  cp $inst_dir/usr/sbin/mesos-master usr/sbin
-  cp $inst_dir/usr/sbin/mesos-slave usr/sbin
+  cp $inst_dir/usr/local/bin/mesos* usr/bin
+  cp $inst_dir/usr/local/lib/*.la usr/lib
+  cp $inst_dir/usr/local/lib/libmesos-*.so usr/lib
+  cp $inst_dir/usr/local/libexec/mesos/mesos* usr/libexec/mesos
+  cp -r $inst_dir/usr/local/share usr/
+  cp $inst_dir/usr/local/sbin/mesos-master usr/sbin
+  cp $inst_dir/usr/local/sbin/mesos-slave usr/sbin
 )}
 
 function create_lib_symlinks {(
@@ -360,7 +360,7 @@ function deb_ {
     exit 1
   fi
 
-  fpm_ "${opts[@]}" -p "$this"/pkg.deb
+  fpm_ "${opts[@]}" -p "$this"/el-mesos.deb
 }
 
 function check_pkg {
